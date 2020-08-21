@@ -1,24 +1,37 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+// import styled from "styled-components";
 
-const [recipe, setRecipe] = useState({
-    title: "",
-    source: "",
-    ingredients: "",
-    instructions: "",
-    category: ""
-})
 
 const Category = ["Breakfast", "Lunch", "Dinner"]
 
 const AddRecipe = () => {
-
-    handleChange = () => {
-
+    
+    const [recipe, setRecipe] = useState({
+        title: "",
+        source: "",
+        ingredients: "",
+        instructions: "",
+        category: ""
+    })
+    const handleChange = (e) => {
+        const NewRecipe = {
+            ...recipe,
+            [e.target.name]: e.target.value
+        }
+        setRecipe(NewRecipe);
     }
 
-    submit = () => {
-        
+    const submit = (e) => {
+        e.preventDefault();
+        // const ingredientsArray = recipe.ingredients.split("\n");
+        // const instructionsArray = recipe.ingredients.split("\n");
+        // setRecipe({
+        //     ...recipe,
+        //     ingredients: ingredientsArray,
+        //     instructions: instructionsArray
+        // });
+
+
     }
 
     return (
@@ -38,6 +51,7 @@ const AddRecipe = () => {
                     <input type="text" id="ingredients" name="ingredients" value={recipe.ingredients} />
                 </label>
                 <label htmlFor="instructions">
+                    Instructions: 
                     <textarea type="text" id="instructions" name="instructions" value={recipe.instructions} />
                 </label>
                 <label htmlFor="category">
