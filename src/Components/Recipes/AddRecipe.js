@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import * as yup from "yup";
-
+import axios from "axios";
 
 const Category = ["Breakfast", "Lunch", "Dinner"]
 
-const AddRecipe = () => {
+const AddRecipe = (props) => {
     
     const [recipe, setRecipe] = useState({
         title: "",
@@ -67,7 +67,14 @@ const AddRecipe = () => {
         //     ingredients: ingredientsArray,
         //     instructions: instructionsArray
         // });
-
+        props.setCard(recipe);
+        setRecipe({
+            title: "",
+            source: "",
+            ingredients: "",
+            instructions: "",
+            category: ""
+        })
 
     }
 
