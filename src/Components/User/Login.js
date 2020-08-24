@@ -2,6 +2,7 @@ import React from "react";
 import { withFormik, Form } from "formik";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { loginUser } from "../../Actions";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -86,4 +87,7 @@ const FormikApp = withFormik({
   }
 })(Login);
 
-export default FormikApp;
+export default connect(
+  null,
+  { loginUser }
+)(FormikApp);
