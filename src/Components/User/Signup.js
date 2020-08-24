@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as Yup from "yup";
 import styled from "styled-components";
+import { registerUser } from "../../Actions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
@@ -45,28 +46,35 @@ const SignUp = props => {
             <FormWrapper>
             <h1>Create an Account</h1>
             <TextField
-            label="firstname"
+            label="First Name"
             onChange={handleChange}
-            type="firstname"
+            type="fname"
             placeholder="First Name"
-            name="firstname"
+            name="fname"
             />
             <TextField
-             label="lastname"
+             label="Last Name"
              onChange={handleChange}
-             type="lastname"
+             type="lname"
              placeholder="Last Name"
-             name="lastname"
+             name="lname"
             />
             <TextField
-             label="email"
+             label="Email"
              onChange={handleChange}
              type="email"
              placeholder="Email"
              name="email"
             />
             <TextField
-             label="password"
+            label="Username"
+            onChange={handleChange}
+            type="username"
+            placeholder="Username"
+            name="username"
+            />
+            <TextField
+             label="Password"
              onChange={handleChange}
              type="password"
              placeholder="Password"
@@ -92,13 +100,22 @@ const SignUp = props => {
 };
 
 const FormikApp = withFormik({
-  mapPropsToValues({ username, password}) {
+  mapPropsToValues({ fname, lname, email, username, password}) {
       return {
+          fname: fname || "",
+          lname: lname || "",
+          email: email || "",
           username: username || "",
           password: password || ""
       };
   },
   validationSchema: Yup.object().shape({
+      fname: Yup.string()
+      .required(),
+      lname: Yup.string()
+      .required(),
+      email: Yup.string()
+      .required(),
       username: Yup.string()
       .required(),
       password: Yup.string()
@@ -111,4 +128,7 @@ const FormikApp = withFormik({
 })(SignUp);
 
 
-export default FormikApp
+export default connect(
+  null,
+  { registerUser }
+)(FormikApp);
