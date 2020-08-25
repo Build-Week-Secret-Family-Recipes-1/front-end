@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import * as yup from "yup";
 import axios from "axios";
+import RecipeCard from "./RecipeCard"
 
 const Category = ["Breakfast", "Lunch", "Dinner"]
 
@@ -115,6 +116,7 @@ const AddRecipe = (props) => {
                 <button type="submit">Add Recipe</button>
             </form>
         </div>
+            <RecipeCard />
         </div>
     )
 }
