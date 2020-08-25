@@ -3,13 +3,13 @@ import AddRecipe from "./AddRecipe";
 
 
 
-const RecipeCard = () => {
+const RecipeCard = (props) => {
     const [card, setCard] = useState({})
    
 
     return (
        <div>
-          <AddRecipe card={card} setCard={setCard} /> 
+          
        </div>
     )
 }
