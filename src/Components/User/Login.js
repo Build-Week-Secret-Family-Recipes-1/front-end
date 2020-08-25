@@ -83,7 +83,7 @@ const FormikApp = withFormik({
     };
   },
   handleSubmit(values, { props }) {
-    props.login(values, props.history);
+    props.loginUser(values, props.history);
   }
 })(Login);
 

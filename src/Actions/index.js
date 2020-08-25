@@ -9,23 +9,21 @@ export const LOGIN_USER_START = 'LOGIN_USER_START';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 
-export const registerUser = (newUser) => dispatch => {
-    dispatch({
-        type: REGISTER_USER_START
-    })
-    return axios
-    .post('https://secretfamilyrecipesbw.herokuapp.com/api/auth/register', newUser)
-    .then(res => {
-        dispatch({
-            type: REGISTER_USER_SUCCESS, payload: res.data
-        })
-    })
-    .catch(err => {
-        dispatch({
-            type: REGISTER_USER_FAILURE, payload: err
-        })
-    })
-}
+export const registerUser = (user, history) => dispatch => {
+    console.log(user)
+    axios
+      .post(`https://secretfamilyrecipesbw.herokuapp.com/api/auth/register`, user)
+      .then(res => {
+          console.log(res.data)
+        const { token, user } = res.data;
+        localStorage.setItem("token", token);
+            history.push("/");
+      })
+      .catch(err => {
+        console.log("Error on registration", err);
+        dispatch({ type: REGISTER_USER_FAILURE, payload: err });
+      });
+  };
 
 export const loginUser = (user) => dispatch => {
     dispatch({
