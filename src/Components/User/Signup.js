@@ -110,14 +110,15 @@ const FormikApp = withFormik({
       };
   },
   validationSchema: Yup.object().shape({
-      fname: Yup.string()
+      fname: Yup.string("First name is required")
       .required(),
-      lname: Yup.string()
+      lname: Yup.string("Last name is required")
       .required(),
       email: Yup.string()
-      .required(),
+      .email("Invalid Email")
+      .required("Email is required"),
       username: Yup.string()
-      .required(),
+      .required("Username is required"),
       password: Yup.string()
       .min(8, "Password must be 8 characters or longer")
       .required()

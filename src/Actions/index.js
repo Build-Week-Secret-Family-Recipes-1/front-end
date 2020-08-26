@@ -1,6 +1,10 @@
 import axios from 'axios';
 import axiosWithAuth from '../Utils/axiosWithAuth'
 
+export const ADD_RECIPE_SUCCESS = 'ADD_RECIPE_SUCCESS';
+export const ADD_RECIPE_START = 'ADD_RECIPE_START';
+export const ADD_RECIPE_FAILURE = 'ADD_RECIPE_FAILURE';
+
 export const REGISTER_USER_START = 'REGISTER_USER_START';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
