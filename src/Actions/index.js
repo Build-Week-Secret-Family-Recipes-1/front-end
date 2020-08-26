@@ -9,6 +9,8 @@ export const LOGIN_USER_START = 'LOGIN_USER_START';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 
+export const SEARCH_RECIPE = 'SEARCH_RECIPE';
+
 export const registerUser = (user, history) => dispatch => {
     console.log(user)
     axios
@@ -41,4 +43,14 @@ export const loginUser = (user) => dispatch => {
                 type: LOGIN_USER_FAILURE, payload: err
             })
         })
+}
+
+export const search = (searchString, recipes) => {
+    searchString= searchString.toLowerCase();
+    let filteredRecipes = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchString) || recipe.category.toLowerCase().includes(searchString))
+
+    return {
+        type: SEARCH_RECIPE,
+        payload: filteredRecipes
+    }
 }

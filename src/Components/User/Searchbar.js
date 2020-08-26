@@ -4,7 +4,7 @@ import { search } from '../../Actions';
 import styled from 'styled-components';
 
 const InputDiv = styled.div`
-position: absolute; left:50px; top:15px;
+position: absolute; left:50px; top:25px;
 width: 350px;
 display: flex; 
 justify-content: center;

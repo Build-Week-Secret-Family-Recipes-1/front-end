@@ -13,7 +13,7 @@ function App(props) {
     return (
         <Router>
         <div className="App">
-        <Route path='/recipes' component={Nav} />
+         <Route path='/recipes' component={RecipeList} />
          <Route path='/login' component={Login} />
          <Route path='/signup' component={Signup} />
         </div>
