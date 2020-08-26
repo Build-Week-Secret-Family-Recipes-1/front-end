@@ -116,7 +116,7 @@ const AddRecipe = (props) => {
                 <button type="submit">Add Recipe</button>
             </form>
         </div>
-            <RecipeCard />
+            <RecipeCard recipe={recipe} />
         </div>
     )
 }
