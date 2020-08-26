@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderBottom: `2px solid black`,
     backgroundImage: `url(https://suindependent.com/wp-content/uploads/2018/11/cranberries.jpg)`,
     backgroundRepeat: `no-repeat`,
     backgroundSize: `cover`
@@ -34,6 +34,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function RecipeList() {
   const classes = useStyles();
+  const [search, setSearch] = useState('')
+
+  const handleChange = event => {
+    const {value} = event.target;
+    setSearch(value);
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+  }
 
   return (
     <React.Fragment>
@@ -47,7 +57,11 @@ export default function RecipeList() {
             className={classes.toolbarTitle}
           ></Typography>
           <nav>
-              <SearchBar />
+              <SearchBar
+              search={search} 
+              handleChange={handleChange} 
+              handleSubmit={handleSubmit}
+              />
             {localStorage.getItem("token") ? (
               <RouterLink style={{ textDecoration: "none" }} to="/">
                 <Button

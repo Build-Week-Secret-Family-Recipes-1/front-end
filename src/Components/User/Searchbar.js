@@ -27,19 +27,23 @@ width: 300px;
 
 
 
-class SearchBar extends React.Component {
-    render() {
+export default function Searchbar(props) {
+
         return (
             <div>
+                <form onSubmit={props.handleSubmit}>
                 <InputDiv>
                     <Input className='searchBarInput'
-                        placeholder="Search for Recipes..."
+                    className="search-box"
+                    type="text"
+                    name="search"
+                    value={props.search}
+                    onChange={props.handleChange}
+                    placeholder="Search for Recipes..."
                     />
                 </InputDiv >
+                </form>
             </div>
         )
-    }
 
 };
-
-export default SearchBar;

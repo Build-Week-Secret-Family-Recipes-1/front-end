@@ -33,7 +33,8 @@ height: 280px;
 const Back = styled.div`
 margin-left: -10px;
 text-decoration: none;
-`
+`;
+
 
 
 const Login = ({ handleChange }) => {
