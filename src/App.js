@@ -13,9 +13,10 @@ function App(props) {
     return (
         <Router>
         <div className="App">
-         <Route path='/recipes' component={RecipeList} />
          <Route path='/login' component={Login} />
          <Route path='/signup' component={Signup} />
+         <PrivateRoute exact path='/recipes' component={RecipeList} />
+         <PrivateRoute exact path="/add-recipe" component={AddRecipe} />
         </div>
         </Router>
     )

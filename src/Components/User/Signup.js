@@ -39,6 +39,7 @@ text-decoration: none;
 
 const SignUp = props => {
     const { values, handleChange } = props;
+
     return (
       <div>
         <Banner/>

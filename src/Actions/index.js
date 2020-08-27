@@ -9,9 +9,13 @@ export const EDIT_RECIPE_SUCCESS = 'EDIT_RECIPE_SUCCESS';
 export const EDIT_RECIPE_START = 'EDIT_RECIPE_START';
 export const EDIT_RECIPE_FAILURE = 'EDIT_RECIPE_FAILURE';
 
-export const GET_RECIPE_START = 'GET_RECIPE_START';
-export const GET_RECIPE_SUCCESS = 'GET_RECIPE_SUCCESS';
-export const GET_RECIPE_FAILURE = 'GET_RECIPE_FAILURE';
+export const DELETE_RECIPE_START = 'DELETE_RECIPE_START';
+export const DELETE_RECIPE_SUCCESS = 'DELETE_RECIPE_SUCCESS';
+export const DELETE_RECIPE_FAILURE = 'DELETE_RECIPE_FAILURE';
+
+export const GET_RECIPES_START = 'GET_RECIPE_START';
+export const GET_RECIPES_SUCCESS = 'GET_RECIPE_SUCCESS';
+export const GET_RECIPES_FAILURE = 'GET_RECIPE_FAILURE';
 
 export const REGISTER_USER_START = 'REGISTER_USER_START';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -23,29 +27,47 @@ export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 
 export const SEARCH_RECIPE = 'SEARCH_RECIPE';
 
+export const GET_CATEGORIES_START = 'GET_CATEGORIES_START';
+export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
+export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
+
 const api = 'https://secretfamilyrecipesbw.herokuapp.com/api'
 
-// export const addRecipe = (newRecipe) => {
-//     dispatch({ type: ADD_RECIPE_START });
-//     return axios
-//     .post(api + )
-// }
-
-export const getRecipe = () => dispatch => {
-    dispatch({
-        type: GET_RECIPE_START
-    })
-    return axios
-        .get('https://secretfamilyrecipesbw.herokuapp.com/api/users/:id/recipes')
+export const addRecipe = (newRecipe) => dispatch => {
+    console.log(newRecipe);
+    dispatch({ type: ADD_RECIPE_START });
+    console.log(newRecipe);
+    return axiosWithAuth()
+        .post('https://secretfamilyrecipesbw.herokuapp.com/api/users/:id', newRecipe)
         .then(res => {
-            console.log(res.data);
+            console.log( newRecipe);
             dispatch({
-                type: GET_RECIPE_SUCCESS, payload: res.data
+                type: ADD_RECIPE_SUCCESS,
+                payload: res.data
             })
         })
         .catch(err => {
             dispatch({
-                type: GET_RECIPE_FAILURE, payload: err
+                type: ADD_RECIPE_FAILURE, payload: err
+            })
+        })
+}
+
+export const getRecipe = () => dispatch => {
+    dispatch({
+        type: GET_RECIPES_START
+    })
+    axiosWithAuth()
+        .get('https://secretfamilyrecipesbw.herokuapp.com/api/users/:id/recipes')
+        .then(res => {
+            console.log(res.data);
+            dispatch({
+                type: GET_RECIPES_SUCCESS, payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_RECIPES_FAILURE, payload: err
             })
         })
 }
@@ -54,7 +76,7 @@ export const editRecipe = (updatedRecipe) => dispatch => {
     dispatch({
         type: EDIT_RECIPE_SUCCESS
     })
-    return axios
+     axiosWithAuth()
     .put('https://secretfamilyrecipesbw.herokuapp.com/api/users/update/:r_id', updatedRecipe)
     .then(res => {
         dispatch({
@@ -69,32 +91,59 @@ export const editRecipe = (updatedRecipe) => dispatch => {
     })
 }
 
+export const deleteRecipe = (id) => dispatch => {
+    dispatch({
+        type: DELETE_RECIPE_START
+    })
+    return axios
+        .delete(' https://secretfamilyrecipesbw.herokuapp.com/api/users/:id/delete/:9er_pride:')
+        .then(res => {
+            dispatch({
+                type: DELETE_RECIPE_SUCCESS, payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: DELETE_RECIPE_FAILURE, payload: err
+            })
+        })
+}
+
 export const registerUser = (user, history) => dispatch => {
     console.log(user)
+    dispatch({
+        type: REGISTER_USER_START
+    })
     axios
-      .post( api + `auth/register`, user)
-      .then(res => {
-          console.log(res.data)
-        const { token, user } = res.data;
-        localStorage.setItem("token", token);
-            history.push("/");
-      })
-      .catch(err => {
-        console.log("Error on registration", err);
-        dispatch({ type: REGISTER_USER_FAILURE, payload: err });
-      });
-  };
+        .post('https://secretfamilyrecipesbw.herokuapp.com/api/auth/register', user)
+        .then(res => {
+            dispatch({
+                type: REGISTER_USER_SUCCESS, payload: res.data
+            })
+            const { token, user } = res.data;
+            localStorage.setItem("token", token);
+            history.push("/recipes");
+        })
+        .catch(err => {
+            dispatch({
+                type: REGISTER_USER_FAILURE, payload: err
+            })
+        })
+}
 
-export const loginUser = (user) => dispatch => {
+export const loginUser = (user, history) => dispatch => {
     dispatch({
         type: LOGIN_USER_START
     })
-    return axios
+    axios
         .post('https://secretfamilyrecipesbw.herokuapp.com/api/auth/login', user)
         .then(res => {
             dispatch({
                 type: LOGIN_USER_SUCCESS, payload: res.data
             })
+            const { token, user } = res.data;
+            localStorage.setItem("token", token);
+            history.push("/recipes");
         })
         .catch(err => {
             dispatch({
@@ -111,4 +160,22 @@ export const search = (searchString, recipes) => {
         type: SEARCH_RECIPE,
         payload: filteredRecipes
     }
+}
+
+export const getCategories = () => dispatch => {
+    dispatch({
+        type: GET_CATEGORIES_START
+    })
+    return axios
+        .get('https://secretfamilyrecipesbw.herokuapp.com/api/users/:id/:category')
+        .then(res => {
+            dispatch({
+                type: GET_CATEGORIES_SUCCESS, payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_CATEGORIES_FAILURE, payload: err
+            })
+        })
 }

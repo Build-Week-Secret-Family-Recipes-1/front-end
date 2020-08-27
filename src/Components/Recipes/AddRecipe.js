@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import { addRecipe, getCategories } from "../../Actions"
+import { connect } from 'react-redux';
 import * as yup from "yup";
-import axios from "axios";
 import RecipeCard from "./RecipeCard"
 
 const Category = ["Breakfast", "Lunch", "Dinner"]
 
 const AddRecipe = (props) => {
+    const [card, setCard] = useState({})
     
     const [recipe, setRecipe] = useState({
         title: "",
@@ -21,17 +22,17 @@ const AddRecipe = (props) => {
             ...recipe,
             [e.target.name]: e.target.value
         }
-        validateChange(e);
+        // validateChange(e);
         setRecipe(NewRecipe);
     }
 
-    const recipeSchema = yup.object().shape({
-        title: yup.string().required("Please enter a title."),
-        source: yup.string().required("Please enter a source."),
-        ingredients: yup.string().required("Please enter ingredients."),
-        instructions: yup.string.required("Please enter the instructions."),
-        category: yup.string().required("A category is required."),
-    })
+    // const recipeSchema = yup.object().shape({
+    //     title: yup.string().required("Please enter a title."),
+    //     source: yup.string().required("Please enter a source."),
+    //     ingredients: yup.string().required("Please enter ingredients."),
+    //     instructions: yup.string.required("Please enter the instructions."),
+    //     category: yup.string().required("A category is required."),
+    // })
 
     const [errors, setErrors] = useState({
         title: "",
@@ -41,23 +42,23 @@ const AddRecipe = (props) => {
         category: ""
     })
 
-    const validateChange = (e) => {
-        yup
-        .reach(recipeSchema, e.target.name)
-        .validate(e.target.value)
-        .then((valid) => {
-            setErrors({
-                ...errors,
-                [e.target.errors]: ""
-            })
-        })
-        .catch((err) => {
-            setErrors({
-                ...errors,
-                [e.target.name]: err.errors[0]
-            })
-        })
-    }
+    // const validateChange = (e) => {
+    //     yup
+    //     .reach(recipeSchema, e.target.name)
+    //     .validate(e.target.value)
+    //     .then((valid) => {
+    //         setErrors({
+    //             ...errors,
+    //             [e.target.errors]: ""
+    //         })
+    //     })
+    //     .catch((err) => {
+    //         setErrors({
+    //             ...errors,
+    //             [e.target.name]: err.errors[0]
+    //         })
+    //     })
+    // }
 
     const submit = (e) => {
         e.preventDefault();
@@ -68,7 +69,7 @@ const AddRecipe = (props) => {
         //     ingredients: ingredientsArray,
         //     instructions: instructionsArray
         // });
-        props.setCard(recipe);
+        setCard(recipe);
         setRecipe({
             title: "",
             source: "",
@@ -90,21 +91,21 @@ const AddRecipe = (props) => {
                 </label>
                 <label htmlFor="source">
                     Source: 
-                    <input type="text" id="source" name="source" value={recipe.source} />
+                    <input type="text" id="source" name="source" value={recipe.source} onChange={handleChange} />
                     {errors.source.length > 0 ? <p>{errors.source}</p> : null}
                 </label>
                 <label htmlFor="ingredients">
                     Ingredients:
-                    <input type="text" id="ingredients" name="ingredients" value={recipe.ingredients} />
+                    <input type="text" id="ingredients" name="ingredients" value={recipe.ingredients} onChange={handleChange} />
                     {errors.ingredients.length > 0 ? <p>{errors.ingredients}</p> : null}
                 </label>
                 <label htmlFor="instructions">
                     Instructions: 
-                    <textarea type="text" id="instructions" name="instructions" value={recipe.instructions} />
+                    <textarea type="text" id="instructions" name="instructions" value={recipe.instructions} onChange={handleChange} />
                     {errors.instructions.length > 0 ? <p>{errors.instructions}</p> : null}
                 </label>
                 <label htmlFor="category">
-                    <select>
+                    <select onChange={handleChange}>
                         <option>--Please Select A Category--</option>
                         {Category.map((meal) => {
                             return <option value={meal} key={meal}>{meal}</option>
@@ -116,9 +117,14 @@ const AddRecipe = (props) => {
                 <button type="submit">Add Recipe</button>
             </form>
         </div>
-            <RecipeCard recipe={recipe} />
+            <RecipeCard card={card} />
         </div>
     )
 }
 
-export default AddRecipe;
+const mapStateToProps = (state) => ({
+    categories: state.categories
+})
+
+export default connect(
+    mapStateToProps, { addRecipe, getCategories })(AddRecipe);

@@ -45,12 +45,12 @@ const Login = ({ handleChange }) => {
       <FormWrapper>
         <h1>Login</h1>
         <TextField
-          label="email"
+          label="username"
           variant="outlined"
           onChange={handleChange}
-          type="email"
-          placeholder="Email"
-          name="email"
+          type="username"
+          placeholder="Username"
+          name="username"
         />
         <TextField
           label="password"
@@ -77,9 +77,9 @@ const Login = ({ handleChange }) => {
 };
 
 const FormikApp = withFormik({
-  mapPropsToValues({ email, password }) {
+  mapPropsToValues({ username, password }) {
     return {
-      email: email|| "",
+      username: username|| "",
       password: password || ""
     };
   },
