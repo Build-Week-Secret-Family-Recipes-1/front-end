@@ -62,6 +62,19 @@ export default function RecipeList() {
               handleChange={handleChange} 
               handleSubmit={handleSubmit}
               />
+              <RouterLink style={{ textDecoration: "none" }} to="/add-recipe">
+                <Button onClick={() => {
+                
+                }}
+                href="#"
+                  variant="contained"
+                  className={classes.link}
+                  color="primary"
+                  style={{ fontWeight: 700 }}
+                >
+                Add Recipe
+                </Button>
+              </RouterLink>
             {localStorage.getItem("token") ? (
               <RouterLink style={{ textDecoration: "none" }} to="/">
                 <Button
