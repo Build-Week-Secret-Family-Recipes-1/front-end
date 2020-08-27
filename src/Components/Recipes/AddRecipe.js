@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { addRecipe, getCategories } from "../../Actions"
 import { connect } from 'react-redux';
 import * as yup from "yup";
+
 import RecipeCard from "./RecipeCard";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -30,8 +31,34 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(6, 1.5)
     }
   }));
+=======
+import RecipeCard from "./RecipeCard"
+import { makeStyles } from "@material-ui/core/styles";
+
 
 const Category = ["Breakfast", "Lunch", "Dinner"]
+
+const useStyles = makeStyles(theme => ({
+    "@global": {
+      body: {
+        backgroundColor: theme.palette.common.white
+      }
+    },
+    appBar: {
+      borderBottom: `2px solid black`,
+      backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSaeoI_FMGHqvcU5ewBh-b06h2KOelqeXDiA&usqp=CAU)`,
+      backgroundRepeat: `no-repeat`,
+      backgroundSize: `cover`
+    },
+    toolbarTitle: {
+      flexGrow: 1,
+      fontWeight: 900,
+      color: "#333453"
+    },
+    link: {
+      margin: theme.spacing(6, 1.5)
+    }
+  }));
 
 const AddRecipe = (props) => {
     const [card, setCard] = useState({})
