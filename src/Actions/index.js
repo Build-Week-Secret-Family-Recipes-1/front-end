@@ -31,16 +31,17 @@ export const GET_CATEGORIES_START = 'GET_CATEGORIES_START';
 export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
 export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
 
-const api = 'https://secretfamilyrecipesbw.herokuapp.com/api'
+const id = localStorage.getItem("id");
 
 export const addRecipe = (newRecipe) => dispatch => {
     console.log(newRecipe);
+    const id = localStorage.getItem("id");
     dispatch({ type: ADD_RECIPE_START });
     console.log(newRecipe);
     return axiosWithAuth()
-        .post('https://secretfamilyrecipesbw.herokuapp.com/api/users/:id', newRecipe)
+        .post(`https://secretfamilyrecipesbw.herokuapp.com/api/users/${id}`, newRecipe)
         .then(res => {
-            console.log( newRecipe);
+            console.log(res.data);
             dispatch({
                 type: ADD_RECIPE_SUCCESS,
                 payload: res.data
@@ -53,17 +54,19 @@ export const addRecipe = (newRecipe) => dispatch => {
         })
 }
 
-export const getRecipe = () => dispatch => {
+export const getRecipe = (id) => dispatch => {
     dispatch({
         type: GET_RECIPES_START
     })
+    const id = localStorage.getItem("id");
     axiosWithAuth()
-        .get('https://secretfamilyrecipesbw.herokuapp.com/api/users/:id/recipes')
+        .get(`https://secretfamilyrecipesbw.herokuapp.com/api/users/${id}/recipes`)
         .then(res => {
             console.log(res.data);
             dispatch({
                 type: GET_RECIPES_SUCCESS, payload: res.data
             })
+            
         })
         .catch(err => {
             dispatch({
@@ -120,8 +123,9 @@ export const registerUser = (user, history) => dispatch => {
             dispatch({
                 type: REGISTER_USER_SUCCESS, payload: res.data
             })
-            const { token, user } = res.data;
+            const { token, user_id } = res.data;
             localStorage.setItem("token", token);
+            localStorage.setItem("id", user_id);
             history.push("/recipes");
         })
         .catch(err => {
@@ -141,8 +145,9 @@ export const loginUser = (user, history) => dispatch => {
             dispatch({
                 type: LOGIN_USER_SUCCESS, payload: res.data
             })
-            const { token, user } = res.data;
+            const { token, user_id } = res.data;
             localStorage.setItem("token", token);
+            localStorage.setItem("id", user_id);
             history.push("/recipes");
         })
         .catch(err => {

@@ -1,9 +1,40 @@
 import React, { useState } from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { addRecipe, getCategories } from "../../Actions"
 import { connect } from 'react-redux';
 import * as yup from "yup";
+
+import RecipeCard from "./RecipeCard";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+    "@global": {
+      body: {
+        backgroundColor: theme.palette.common.white
+      }
+    },
+    appBar: {
+      borderBottom: `2px solid black`,
+      backgroundImage: `url(https://hofmannsausage.com/pub/media/wysiwyg/4Franks_Slider.jpg)`,
+      backgroundRepeat: `no-repeat`,
+      backgroundSize: `cover`,
+      height: `350px`
+    },
+    toolbarTitle: {
+      flexGrow: 1,
+      fontWeight: 900,
+      color: "#333453"
+    },
+    link: {
+      margin: theme.spacing(6, 1.5)
+    }
+  }));
+=======
 import RecipeCard from "./RecipeCard"
 import { makeStyles } from "@material-ui/core/styles";
+
 
 const Category = ["Breakfast", "Lunch", "Dinner"]
 
@@ -31,6 +62,7 @@ const useStyles = makeStyles(theme => ({
 
 const AddRecipe = (props) => {
     const [card, setCard] = useState({})
+    const classes = useStyles();
     
     const [recipe, setRecipe] = useState({
         title: "",
@@ -93,6 +125,7 @@ const AddRecipe = (props) => {
         //     instructions: instructionsArray
         // });
         setCard(recipe);
+        props.addRecipe(recipe)
         setRecipe({
             title: "",
             source: "",
@@ -105,6 +138,8 @@ const AddRecipe = (props) => {
 
     return (
         <div>
+                    <AppBar position="static" elevation={0} className={classes.appBar}>
+                </AppBar>
             <div>
             <form onSubmit={submit}>
                 <label htmlFor="title">
