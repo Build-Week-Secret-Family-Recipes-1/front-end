@@ -85,17 +85,16 @@ const AddRecipe = (props) => {
             ...recipe,
             [e.target.name]: e.target.value
         }
-        // validateChange(e);
+        validateChange(e);
         setRecipe(NewRecipe);
     }
 
-    // const recipeSchema = yup.object().shape({
-    //     title: yup.string().required("Please enter a title."),
-    //     source: yup.string().required("Please enter a source."),
-    //     ingredients: yup.string().required("Please enter ingredients."),
-    //     instructions: yup.string.required("Please enter the instructions."),
-    //     category: yup.string().required("A category is required."),
-    // })
+    const recipeSchema = yup.object().shape({
+        title: yup.string().required("Please enter a title."),
+        source: yup.string().required("Please enter a source."),
+        ingredients: yup.string().required("Please enter ingredients."),
+        category: yup.string().oneOf(Category,"A category is required."),
+    })
 
     const [errors, setErrors] = useState({
         title: "",
@@ -105,23 +104,23 @@ const AddRecipe = (props) => {
         category: ""
     })
 
-    // const validateChange = (e) => {
-    //     yup
-    //     .reach(recipeSchema, e.target.name)
-    //     .validate(e.target.value)
-    //     .then((valid) => {
-    //         setErrors({
-    //             ...errors,
-    //             [e.target.errors]: ""
-    //         })
-    //     })
-    //     .catch((err) => {
-    //         setErrors({
-    //             ...errors,
-    //             [e.target.name]: err.errors[0]
-    //         })
-    //     })
-    // }
+    const validateChange = (e) => {
+        yup
+        .reach(recipeSchema, e.target.name)
+        .validate(e.target.value)
+        .then((valid) => {
+            setErrors({
+                ...errors,
+                [e.target.errors]: ""
+            })
+        })
+        .catch((err) => {
+            setErrors({
+                ...errors,
+                [e.target.name]: err.errors[0]
+            })
+        })
+    }
 
     const submit = (e) => {
         e.preventDefault();
