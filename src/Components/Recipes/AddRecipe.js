@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import * as yup from "yup";
 import RecipeCard from "./RecipeCard";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     "@global": {
@@ -31,37 +32,12 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-import RecipeCard from "./RecipeCard"
-import { makeStyles } from "@material-ui/core/styles";
-
-
 const Category = ["Breakfast", "Lunch", "Dinner"]
-
-const useStyles = makeStyles(theme => ({
-    "@global": {
-      body: {
-        backgroundColor: theme.palette.common.white
-      }
-    },
-    appBar: {
-      borderBottom: `2px solid black`,
-      backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSaeoI_FMGHqvcU5ewBh-b06h2KOelqeXDiA&usqp=CAU)`,
-      backgroundRepeat: `no-repeat`,
-      backgroundSize: `cover`
-    },
-    toolbarTitle: {
-      flexGrow: 1,
-      fontWeight: 900,
-      color: "#333453"
-    },
-    link: {
-      margin: theme.spacing(6, 1.5)
-    }
-  }));
 
 const AddRecipe = (props) => {
     const [card, setCard] = useState({})
     const classes = useStyles();
+    const history = useHistory();
     
     const [recipe, setRecipe] = useState({
         title: "",
@@ -70,6 +46,7 @@ const AddRecipe = (props) => {
         instructions: "",
         category: ""
     })
+
     const handleChange = (e) => {
         e.persist();
         const NewRecipe = {
@@ -171,7 +148,7 @@ const AddRecipe = (props) => {
                     </select>
 
                 </label>
-                <button type="submit">Add Recipe</button>
+                <button type="submit" onClick={() => {history.goBack("/recipes")}}>Add Recipe</button>
             </form>
         </div>
             <RecipeCard card={card} />

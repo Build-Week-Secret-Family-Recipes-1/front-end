@@ -3,27 +3,35 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Nav from '../User/Nav';
-import { getRecipe } from '../../Actions'
+import { getRecipe } from '../../Actions';
+import axiosWithAuth from '../../Utils/axiosWithAuth';
 import RecipeCard from './RecipeCard'
 
 const RecipeList = props => {
-    const { getRecipe } = props;
-    const [filteredRecipes, setFilteredRecipes] = useState([]);
-    const recipeDisplay = props.recipes
+    const myRecipes = [];
+    const [recipe, setRecipes] = useState([])
+    console.log("recipeList", recipe)
 
     useEffect(() => {
-        getRecipe()
-    }, [getRecipe]);
-
+        const id = localStorage.getItem("id");
+        axiosWithAuth()
+        .get(`/users/${id}/recipes`)
+        .then(res=>{
+        console.log( res.data)
+        setRecipes(res.data)
+          })
+        .catch(err=>console.log( err.message, err.response))
+      }, [])
 
 
 return (
     <div>
      < Nav/>
      <div className="recipe-container">
-         {filteredRecipes.map(recipe => 
-         <RecipeCard recipe={recipe} />
-         )}
+       {console.log(`recipe`, recipe)}
+      {recipe && recipe.map(recipe => (
+         <RecipeCard card={recipe} />
+      ))}
      </div>
     </div>
 )
@@ -34,7 +42,6 @@ return (
 const mapStateToProps = state => {
     return {
        recipe: state.recipe,
-       filteredRecipes: state.filteredRecipes,
        token: state.token 
     }
 }

@@ -27,7 +27,7 @@ width: 300px;
 
 
 
-export default function Searchbar(props) {
+function Searchbar(props) {
 
         return (
             <div>
@@ -47,3 +47,5 @@ export default function Searchbar(props) {
         )
 
 };
+
+export default Searchbar

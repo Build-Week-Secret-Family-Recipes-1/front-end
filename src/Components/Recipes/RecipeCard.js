@@ -3,7 +3,6 @@ import { getRecipe } from '../../Actions'
 import { connect } from "react-redux";
 
 
-
 const RecipeCard = (props) => {
     console.log(props)
 
