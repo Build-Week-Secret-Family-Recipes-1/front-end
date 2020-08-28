@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 
+
 const Card = styled.div`
     width: 50%;
     height: 200px;
@@ -30,6 +31,7 @@ justify-content: space-around;
 const Category = styled.p`
 width: 25%;
 `;
+
 
 const RecipeCard = (props) => {
     console.log(props)

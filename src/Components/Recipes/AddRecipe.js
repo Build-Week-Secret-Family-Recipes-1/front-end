@@ -8,6 +8,7 @@ import * as yup from "yup";
 import RecipeCard from "./RecipeCard";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     "@global": {
@@ -31,7 +32,6 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(6, 1.5)
     }
   }));
-
 
 
 const Category = ["Breakfast", "Lunch", "Dinner"];
@@ -65,9 +65,11 @@ height: 50px;
 border-radius: 45%;
 `;
 
+
 const AddRecipe = (props) => {
     const [card, setCard] = useState({})
     const classes = useStyles();
+    const history = useHistory();
     
     const [recipe, setRecipe] = useState({
         title: "",
@@ -76,6 +78,7 @@ const AddRecipe = (props) => {
         instructions: "",
         category: ""
     })
+
     const handleChange = (e) => {
         e.persist();
         const NewRecipe = {
@@ -177,8 +180,9 @@ const AddRecipe = (props) => {
                     </Select>
 
                 </Label>
-                <SubmitButton type="submit">Add Recipe</SubmitButton>
+                <SubmitButton type="submit" onClick={() => {history.goBack("/recipes")}}>Add Recipe</SubmitButton>
             </Form>
+
         </div>
             <RecipeCard card={card} />
         </div>
