@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import * as yup from "yup";
 import RecipeCard from "./RecipeCard";
 import { makeStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 
 const useStyles = makeStyles(theme => ({
     "@global": {
@@ -16,10 +17,10 @@ const useStyles = makeStyles(theme => ({
     },
     appBar: {
       borderBottom: `2px solid black`,
-      backgroundImage: `url(https://www.simplyrecipes.com/wp-content/uploads/2010/05/chili-dog-horiz-b-1600.jpg)`,
+      backgroundImage: `url(https://businessmirror.com.ph/wp-content/uploads/2020/05/AustralianGrapes001-V2-1.jpg)`,
       backgroundRepeat: `no-repeat`,
       backgroundSize: `cover`,
-      height: `350px`
+      height: `150px`
     },
     toolbarTitle: {
       flexGrow: 1,
@@ -31,33 +32,38 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-import RecipeCard from "./RecipeCard"
-import { makeStyles } from "@material-ui/core/styles";
 
 
-const Category = ["Breakfast", "Lunch", "Dinner"]
+const Category = ["Breakfast", "Lunch", "Dinner"];
 
-const useStyles = makeStyles(theme => ({
-    "@global": {
-      body: {
-        backgroundColor: theme.palette.common.white
-      }
-    },
-    appBar: {
-      borderBottom: `2px solid black`,
-      backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSaeoI_FMGHqvcU5ewBh-b06h2KOelqeXDiA&usqp=CAU)`,
-      backgroundRepeat: `no-repeat`,
-      backgroundSize: `cover`
-    },
-    toolbarTitle: {
-      flexGrow: 1,
-      fontWeight: 900,
-      color: "#333453"
-    },
-    link: {
-      margin: theme.spacing(6, 1.5)
-    }
-  }));
+const Form = styled.form`
+display: flex;
+flex-direction: column;
+margin: 25px auto 25px auto;
+`;
+
+const Label = styled.label`
+margin: 5px auto;
+`;
+
+const Input = styled.input`
+margin-left: 2%;
+`;
+
+const Textarea = styled.textarea`
+margin-left: 2%;
+`;
+
+const Select = styled.select`
+margin-bottom: 5px;
+`;
+
+const SubmitButton = styled.button`
+width: 25%;
+margin-left: 38%;
+height: 50px;
+border-radius: 45%;
+`;
 
 const AddRecipe = (props) => {
     const [card, setCard] = useState({})
@@ -140,39 +146,39 @@ const AddRecipe = (props) => {
                     <AppBar position="static" elevation={0} className={classes.appBar}>
                 </AppBar>
             <div>
-            <form onSubmit={submit}>
-                <label htmlFor="title">
+            <Form onSubmit={submit}>
+                <Label htmlFor="title">
                     Title:
-                    <input type="text" id="title" name="title" value={recipe.name} onChange={handleChange} />
+                    <Input type="text" id="title" name="title" value={recipe.name} onChange={handleChange} />
                     {errors.title.length > 0 ? <p classname="errors">{errors.title}</p> : null}
-                </label>
-                <label htmlFor="source">
+                </Label>
+                <Label htmlFor="source">
                     Source: 
-                    <input type="text" id="source" name="source" value={recipe.source} onChange={handleChange} />
+                    <Input type="text" id="source" name="source" value={recipe.source} onChange={handleChange} />
                     {errors.source.length > 0 ? <p>{errors.source}</p> : null}
-                </label>
-                <label htmlFor="ingredients">
+                </Label>
+                <Label htmlFor="ingredients">
                     Ingredients:
-                    <input type="text" id="ingredients" name="ingredients" value={recipe.ingredients} onChange={handleChange} />
+                    <Input type="text" id="ingredients" name="ingredients" value={recipe.ingredients} onChange={handleChange} />
                     {errors.ingredients.length > 0 ? <p>{errors.ingredients}</p> : null}
-                </label>
-                <label htmlFor="instructions">
+                </Label>
+                <Label htmlFor="instructions">
                     Instructions: 
-                    <textarea type="text" id="instructions" name="instructions" value={recipe.instructions} onChange={handleChange} />
+                    <Textarea type="text" id="instructions" name="instructions" value={recipe.instructions} onChange={handleChange} />
                     {errors.instructions.length > 0 ? <p>{errors.instructions}</p> : null}
-                </label>
-                <label htmlFor="category">
-                    <select onChange={handleChange}>
+                </Label>
+                <Label htmlFor="category">
+                    <Select onChange={handleChange}>
                         <option>--Please Select A Category--</option>
                         {Category.map((meal) => {
                             return <option value={meal} key={meal}>{meal}</option>
                         })}
                         {errors.category.length > 0 ? <p>{errors.category}</p> : null}
-                    </select>
+                    </Select>
 
-                </label>
-                <button type="submit">Add Recipe</button>
-            </form>
+                </Label>
+                <SubmitButton type="submit">Add Recipe</SubmitButton>
+            </Form>
         </div>
             <RecipeCard card={card} />
         </div>
