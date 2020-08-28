@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import * as yup from "yup";
 import RecipeCard from "./RecipeCard";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     "@global": {
@@ -36,6 +37,7 @@ const Category = ["Breakfast", "Lunch", "Dinner"]
 const AddRecipe = (props) => {
     const [card, setCard] = useState({})
     const classes = useStyles();
+    const history = useHistory();
     
     const [recipe, setRecipe] = useState({
         title: "",
@@ -44,6 +46,7 @@ const AddRecipe = (props) => {
         instructions: "",
         category: ""
     })
+    
     const handleChange = (e) => {
         e.persist();
         const NewRecipe = {
@@ -145,7 +148,7 @@ const AddRecipe = (props) => {
                     </select>
 
                 </label>
-                <button type="submit">Add Recipe</button>
+                <button type="submit" onClick={() => {history.goBack("/recipes")}}>Add Recipe</button>
             </form>
         </div>
             <RecipeCard card={card} />
