@@ -10,6 +10,7 @@ const Card = styled.div`
     height: 200px;
     border: 2px solid black;
     margin-left: 25%;
+    margin-top: 5px;
 `;
 
 const Title = styled.p`

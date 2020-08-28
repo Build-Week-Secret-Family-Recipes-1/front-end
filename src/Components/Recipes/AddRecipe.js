@@ -171,7 +171,7 @@ const AddRecipe = (props) => {
                     {errors.instructions.length > 0 ? <p>{errors.instructions}</p> : null}
                 </Label>
                 <Label htmlFor="category">
-                    <Select onChange={handleChange}>
+                    <Select name="category" onChange={handleChange}>
                         <option>--Please Select A Category--</option>
                         {Category.map((meal) => {
                             return <option value={meal} key={meal}>{meal}</option>
