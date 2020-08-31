@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RecipeList() {
+export default function RecipeList(props) {
   const classes = useStyles();
   const [search, setSearch] = useState('')
 
@@ -59,7 +59,7 @@ export default function RecipeList() {
           <nav>
               <SearchBar
               search={search} 
-              handleChange={handleChange} 
+              handleChange={handleChange}
               handleSubmit={handleSubmit}
               />
               <RouterLink style={{ textDecoration: "none" }} to="/add-recipe">

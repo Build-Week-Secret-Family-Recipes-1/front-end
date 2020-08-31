@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.delete-button {
+  position: absolute;
+  right: 35em;
+  margin-top: -165px;
+}
+
+.edit-button {
+  position: absolute;
+  right: 29em;
+  margin-top: -165px;
+}

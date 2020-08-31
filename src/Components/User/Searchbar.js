@@ -37,7 +37,7 @@ function Searchbar(props) {
                     className="search-box"
                     type="text"
                     name="search"
-                    value={props.search}
+                    value={props.searchTerm}
                     onChange={props.handleChange}
                     placeholder="Search for Recipes..."
                     />

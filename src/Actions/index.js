@@ -31,6 +31,10 @@ export const GET_CATEGORIES_START = 'GET_CATEGORIES_START';
 export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
 export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
 
+export const GET_TITLE_START = 'GET_TITLE_START';
+export const GET_TITLE_SUCCESS = 'GET_TITLE_SUCCESS';
+export const GET_TITLE_FAILURE = 'GET_TITLE_FAILURE';
+
 const id = localStorage.getItem("id");
 
 export const addRecipe = (newRecipe) => dispatch => {
@@ -94,24 +98,6 @@ export const editRecipe = (updatedRecipe) => dispatch => {
     })
 }
 
-export const deleteRecipe = (id) => dispatch => {
-    dispatch({
-        type: DELETE_RECIPE_START
-    })
-    return axios
-        .delete(' https://secretfamilyrecipesbw.herokuapp.com/api/users/:id/delete/:9er_pride:')
-        .then(res => {
-            dispatch({
-                type: DELETE_RECIPE_SUCCESS, payload: res.data
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: DELETE_RECIPE_FAILURE, payload: err
-            })
-        })
-}
-
 export const registerUser = (user, history) => dispatch => {
     console.log(user)
     dispatch({
@@ -172,7 +158,7 @@ export const getCategories = () => dispatch => {
         type: GET_CATEGORIES_START
     })
     return axios
-        .get('https://secretfamilyrecipesbw.herokuapp.com/api/users/:id/:category')
+        .get(`/api/users/${id}/:category`)
         .then(res => {
             dispatch({
                 type: GET_CATEGORIES_SUCCESS, payload: res.data
@@ -183,4 +169,22 @@ export const getCategories = () => dispatch => {
                 type: GET_CATEGORIES_FAILURE, payload: err
             })
         })
+}
+
+export const getTitle = () => dispatch => {
+    dispatch({
+        type: GET_TITLE_START
+    })
+    return axios
+    .get(`/api/users/${id}/recipes/:title`)
+    .then(res => {
+        dispatch({
+            type: GET_TITLE_SUCCESS, payload: res.data
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: GET_TITLE_FAILURE, payload: err
+        })
+    })
 }
