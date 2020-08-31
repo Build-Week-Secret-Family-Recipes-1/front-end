@@ -59,10 +59,9 @@ margin-bottom: 5px;
 `;
 
 const SubmitButton = styled.button`
-width: 25%;
-margin-left: 38%;
-height: 50px;
-border-radius: 45%;
+width: 5%;
+margin-left: 47.5%;
+height: 40px;
 `;
 
 
