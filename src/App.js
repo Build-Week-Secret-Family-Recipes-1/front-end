@@ -6,6 +6,8 @@ import './App.css';
 import AddRecipe from "./Components/Recipes/AddRecipe";
 import RecipeList from './Components/Recipes/RecipeList';
 import PrivateRoute from './Utils/PrivateRoute';
+import { makeStyles } from "@material-ui/core/styles";
+import WelcomePage from './Components/User/WelcomePage'
 
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
         <Router>
         <div className="App">
         <Switch>
+         <Route exact path='/' component={WelcomePage} />
          <Route path='/login' component={Login} />
          <Route path='/signup' component={Signup} />
          <PrivateRoute exact path='/recipes' component={RecipeList} />
