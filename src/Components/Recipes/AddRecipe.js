@@ -84,17 +84,8 @@ const AddRecipe = (props) => {
             ...recipe,
             [e.target.name]: e.target.value
         }
-        // validateChange(e);
         setRecipe(NewRecipe);
     }
-
-    // const recipeSchema = yup.object().shape({
-    //     title: yup.string().required("Please enter a title."),
-    //     source: yup.string().required("Please enter a source."),
-    //     ingredients: yup.string().required("Please enter ingredients."),
-    //     instructions: yup.string.required("Please enter the instructions."),
-    //     category: yup.string().required("A category is required."),
-    // })
 
     const [errors, setErrors] = useState({
         title: "",
@@ -104,33 +95,8 @@ const AddRecipe = (props) => {
         category: ""
     })
 
-    // const validateChange = (e) => {
-    //     yup
-    //     .reach(recipeSchema, e.target.name)
-    //     .validate(e.target.value)
-    //     .then((valid) => {
-    //         setErrors({
-    //             ...errors,
-    //             [e.target.errors]: ""
-    //         })
-    //     })
-    //     .catch((err) => {
-    //         setErrors({
-    //             ...errors,
-    //             [e.target.name]: err.errors[0]
-    //         })
-    //     })
-    // }
-
     const submit = (e) => {
         e.preventDefault();
-        // const ingredientsArray = recipe.ingredients.split("\n");
-        // const instructionsArray = recipe.ingredients.split("\n");
-        // setRecipe({
-        //     ...recipe,
-        //     ingredients: ingredientsArray,
-        //     instructions: instructionsArray
-        // });
         setCard(recipe);
         props.addRecipe(recipe)
         setRecipe({

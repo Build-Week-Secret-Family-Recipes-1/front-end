@@ -3,7 +3,9 @@ import axiosWithAuth from "../../Utils/axiosWithAuth"
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import EditRecipe from "./EditRecipe"
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../../App.css'
 
 
@@ -39,21 +41,9 @@ width: 25%;
 
 const RecipeCard = (props) => {
     console.log("thrown text", props)
-    const [localRecipe, setLocalRecipe] = useState({});
-    const [editing, setEditing] = useState(false);
     const history = useHistory();
     const id = localStorage.getItem("id");
 
-    const handleEdit = e => {
-        e.preventDefault();
-        axiosWithAuth()
-          .put(`/user/update/${props.card.r_id}`, localRecipe)
-          .then(res => {
-            console.log("SUCCESS", res);
-            setEditing(false);
-          })
-          .catch(err => console.log("ERROR", err));
-      };
 
     const handleDelete = (e) => {
         e.preventDefault();
@@ -68,9 +58,6 @@ const RecipeCard = (props) => {
         );
     };
 
-    const handleChanges = e => {
-        setLocalRecipe({ ...localRecipe, [e.target.name]: e.target.value });
-      };
 
     return (
        <Card>
@@ -80,13 +67,13 @@ const RecipeCard = (props) => {
                 <p>Ingredients: {props.card.ingredients}</p>
                 <p>Instructions: {props.card.instructions}</p>
             </Body>
-            <p>Category: {props.card.catgory}</p>
+            <p>Category: {props.card.category}</p>
             <div className="edit-button">
-            <Button
-                 variant="outlined"
-                 onClick={handleEdit}
-                >Edit
-                </Button>
+            <Link to={`/edit-recipe/${id}`}>
+              <Button onClick={() => localStorage.setItem("r_id", props.card.r_id )}>
+                 Edit
+              </Button>
+            </Link>
                 </div>
                 <div className="delete-button">
                 <Button
