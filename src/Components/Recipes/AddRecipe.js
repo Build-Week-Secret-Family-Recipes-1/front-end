@@ -81,8 +81,6 @@ const AddRecipe = (props) => {
             ...recipe,
             [e.target.name]: e.target.value
         }
-        setRecipe(NewRecipe);
-    }
 
     const [errors, setErrors] = useState({
         title: "",
@@ -91,6 +89,7 @@ const AddRecipe = (props) => {
         instructions: "",
         category: ""
     })
+
 
     const submit = (e) => {
         e.preventDefault();
