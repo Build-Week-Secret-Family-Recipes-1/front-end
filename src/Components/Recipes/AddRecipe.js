@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { addRecipe, getCategories } from "../../Actions"
 import { connect } from 'react-redux';
+import * as yup from "yup";
 import RecipeCard from "./RecipeCard";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
@@ -81,6 +84,7 @@ const AddRecipe = (props) => {
             ...recipe,
             [e.target.name]: e.target.value
         }
+        setRecipe(NewRecipe);
     }
 
     const [errors, setErrors] = useState({
@@ -94,7 +98,6 @@ const AddRecipe = (props) => {
 
     const submit = (e) => {
         e.preventDefault();
-        setCard(recipe);
         props.addRecipe(recipe)
         setRecipe({
             title: "",
@@ -148,14 +151,12 @@ const AddRecipe = (props) => {
         </div>
             <RecipeCard card={card} />
         </div>
-    
     )
-   
 }
 
-const mapStateToProps = (state) => (
-    {categories: state.categories}
-    )
+const mapStateToProps = (state) => ({
+    categories: state.categories
+})
 
 export default connect(
     mapStateToProps, { addRecipe, getCategories })(AddRecipe);
