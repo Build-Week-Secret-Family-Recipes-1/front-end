@@ -98,7 +98,6 @@ const AddRecipe = (props) => {
 
     const submit = (e) => {
         e.preventDefault();
-        // setCard(recipe);
         props.addRecipe(recipe)
         setRecipe({
             title: "",
