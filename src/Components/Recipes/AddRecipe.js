@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import { addRecipe, getCategories } from "../../Actions"
 import { connect } from 'react-redux';
-import * as yup from "yup";
 import RecipeCard from "./RecipeCard";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
@@ -151,6 +148,7 @@ const AddRecipe = (props) => {
             <RecipeCard card={card} />
         </div>
     )
+  }
 }
 
 const mapStateToProps = (state) => ({
