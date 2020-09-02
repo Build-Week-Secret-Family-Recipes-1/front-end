@@ -148,6 +148,7 @@ const AddRecipe = (props) => {
             <RecipeCard card={card} />
         </div>
     )
+  }
 }
 
 const mapStateToProps = (state) => ({
