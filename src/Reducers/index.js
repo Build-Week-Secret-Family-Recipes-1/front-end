@@ -28,6 +28,7 @@ function reducer(state = initialState, action) {
                 fetchingRecipes: true
             }
         case GET_RECIPES_SUCCESS:
+            console.log(action.payload)
             return {
                 ...state,
                 fetchingRecipes: false,

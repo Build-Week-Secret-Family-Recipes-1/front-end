@@ -64,7 +64,7 @@ export const getRecipe = (id) => dispatch => {
     })
     const id = localStorage.getItem("id");
     axiosWithAuth()
-        .get(`https://secretfamilyrecipesbw.herokuapp.com/api/users/${id}/recipes`)
+        .get(`/users/${id}/recipes`)
         .then(res => {
             console.log(res.data);
             dispatch({
@@ -79,12 +79,12 @@ export const getRecipe = (id) => dispatch => {
         })
 }
 
-export const editRecipe = (updatedRecipe) => dispatch => {
+export const editRecipe = (r_id, localRecipe) => dispatch => {
     dispatch({
         type: EDIT_RECIPE_SUCCESS
     })
      axiosWithAuth()
-    .put('https://secretfamilyrecipesbw.herokuapp.com/api/users/update/:r_id', updatedRecipe)
+    .put(`/users/${id}/update/${r_id}`, localRecipe)
     .then(res => {
         dispatch({
             type: EDIT_RECIPE_SUCCESS,

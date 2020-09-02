@@ -11,16 +11,18 @@ const RecipeList = props => {
     const myRecipes = [];
     const [recipe, setRecipes] = useState([])
     console.log("recipeList", recipe)
+    console.log(props)
 
     useEffect(() => {
         const id = localStorage.getItem("id");
-        axiosWithAuth()
-        .get(`/users/${id}/recipes`)
-        .then(res=>{
-        console.log( res.data)
-        setRecipes(res.data)
-          })
-        .catch(err=>console.log( err.message, err.response))
+        // axiosWithAuth()
+        // .get(`/users/${id}/recipes`)
+        // .then(res=>{
+        // console.log( res.data)
+        // setRecipes(res.data)
+        //   })
+        // .catch(err=>console.log( err.message, err.response))
+        props.getRecipe(id)
       }, [])
 
 
@@ -29,7 +31,7 @@ return (
      < Nav/>
      <div className="recipe-container">
        {console.log(`recipe`, recipe)}
-      {recipe && recipe.map(recipe => (
+      {props.recipe && props.recipe.map(recipe => (
          <RecipeCard card={recipe} />
       ))}
      </div>
@@ -40,8 +42,9 @@ return (
 }
 
 const mapStateToProps = state => {
+  console.log("text", state)
     return {
-       recipe: state.recipe,
+       recipe: state.recipes,
        token: state.token 
     }
 }
