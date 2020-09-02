@@ -81,6 +81,7 @@ const AddRecipe = (props) => {
             ...recipe,
             [e.target.name]: e.target.value
         }
+    }
 
     const [errors, setErrors] = useState({
         title: "",
@@ -147,13 +148,14 @@ const AddRecipe = (props) => {
         </div>
             <RecipeCard card={card} />
         </div>
+    
     )
-  }
+   
 }
 
-const mapStateToProps = (state) => ({
-    categories: state.categories
-})
+const mapStateToProps = (state) => (
+    {categories: state.categories}
+    )
 
 export default connect(
     mapStateToProps, { addRecipe, getCategories })(AddRecipe);
